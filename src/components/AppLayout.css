@@ -1,0 +1,137 @@
+.app-container {
+  display: flex;
+  min-height: 100vh;
+  background-color: var(--ink);
+  position: relative;
+  width: 100%;
+}
+
+/* Mobile Header (Hidden on Desktop, Visible on Tablets and Mobile) */
+.mobile-header {
+  display: none;
+}
+
+.mobile-backdrop {
+  display: none;
+}
+
+.main-content {
+  flex: 1;
+  margin-left: 280px; /* 280px desktop sidebar */
+  min-height: 100vh;
+  width: calc(100% - 280px);
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.content-wrapper {
+  background: var(--ink);
+  min-height: 100vh;
+  padding: 2.5rem;
+  position: relative;
+  overflow-x: hidden;
+  animation: step-reveal 280ms ease-out forwards;
+}
+
+@keyframes step-reveal {
+  0% { transform: translateY(20px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+/* Responsive Breakpoints for Tablet & Mobile */
+@media (max-width: 1023px) {
+  .app-container {
+    flex-direction: column;
+  }
+
+  .mobile-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    padding: 0 1.25rem;
+    background: rgba(13, 12, 10, 0.95);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    z-index: 90;
+  }
+
+  .mobile-header-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+  }
+
+  .mobile-header-logo span {
+    font-family: var(--font-disp);
+    font-size: 24px;
+    letter-spacing: 0.05em;
+    color: var(--paper);
+  }
+
+  .mobile-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .mobile-menu-btn {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--paper);
+    padding: 6px;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+  }
+
+  .mobile-menu-btn:hover {
+    background: #222;
+    border-color: #555;
+  }
+
+  .mobile-backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    z-index: 95;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+
+  .mobile-backdrop.visible {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .main-content {
+    margin-left: 0;
+    width: 100%;
+    min-height: calc(100vh - 60px);
+  }
+
+  .content-wrapper {
+    padding: 1.5rem 1.25rem;
+    min-height: calc(100vh - 60px);
+  }
+}
+
+@media (max-width: 480px) {
+  .content-wrapper {
+    padding: 1rem 0.875rem;
+  }
+}
